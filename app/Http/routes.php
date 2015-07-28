@@ -12,5 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('depan');
+});
+
+Route::get('/topuser','webController@topUser');
+
+//login user
+Route::controllers([
+  'auth' => 'Auth\AuthController',
+  'password' => 'Auth\PasswordController',
+]);
+
+Route::group(['prefix' => 'gm-admin', 'middleware' => 'auth'], function()
+{
+	Route::get('/index','AdminController@index');
 });
